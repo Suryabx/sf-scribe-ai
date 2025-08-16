@@ -1,12 +1,27 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import Hero from "@/components/Hero";
+import AIModeSection from "@/components/AIModesSection";
+import AIWorkspace from "@/components/AIWorkspace";
 
 const Index = () => {
+  const [selectedMode, setSelectedMode] = useState<string | null>(null);
+
+  const handleModeSelect = (mode: string) => {
+    setSelectedMode(mode);
+  };
+
+  const handleBack = () => {
+    setSelectedMode(null);
+  };
+
+  if (selectedMode) {
+    return <AIWorkspace selectedMode={selectedMode} onBack={handleBack} />;
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <Hero />
+      <AIModeSection onModeSelect={handleModeSelect} />
     </div>
   );
 };
